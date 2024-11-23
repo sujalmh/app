@@ -1,0 +1,157 @@
+/* General Styles */
+@import url('https://fonts.googleapis.com/css2?family=Gelasio:ital,wght@0,400..700;1,400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+    background-image: url("/static/images/new_bg.png");
+    background-repeat: repeat;
+    background-size: auto;
+    font-family: "Roboto", serif;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Container Style */
+.container {
+    width: 80%;
+    max-width: 800px;
+    margin: auto;
+    border-radius: 15px;
+    padding: 20px;
+    background: rgb(252, 216, 229);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+
+}
+
+/* Title Box */
+.title-box {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: white;
+    border-top: 15px solid purple;
+    color: black;
+    border-radius: 10px;
+    animation: fadeInDown 1s ease;
+}
+
+/* Form Box */
+.form-box {
+    padding: 20px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 2px solid transparent;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: border 0.3s ease, transform 0.3s ease;
+}
+.form-box:hover {
+    border: 2px solid #a64ac9;
+    transform: scale(1.02);
+}
+
+/* Form Group */
+.form-group {
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.form-group div {
+    display: flex;
+    align-items: center;
+    margin-top: 10px; /* Space between options */
+}
+
+
+label {
+    font-size: 1.0rem; /* Increased label size */
+    margin-left: 10px; 
+    display: inline-block;
+    vertical-align: middle; 
+    /* padding-bottom: 5px; */
+}
+label[for="email"]{
+    padding-bottom: 10px;
+}
+
+input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+input[type="email"]:focus {
+    border-color: #a64ac9;
+    box-shadow: 0 0 8px rgba(166, 74, 201, 0.5);
+}
+
+input[type="radio"] {
+    width: 20px; /* Increased size */
+    height: 20px; /* Increased size */
+    accent-color: #a64ac9; /* Maintained color theme */
+    margin-right: 10px; /* Adjusted spacing for alignment */
+    cursor: pointer;
+    vertical-align: middle; /* Aligns with the label text */
+}
+
+.mq{
+    padding-bottom: 10px;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background: rgb(128, 0, 128);
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-align: center;
+}
+button:hover {
+    background: rgb(102, 0, 102);
+    transform: translateY(-3px);
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeInDown 0.8s ease;
+}
+
+.flash-messages {
+    margin: 1em 0;
+    padding: 1em;
+    border-radius: 5px;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    font-size: 1.1em;
+}
+
+.flash-messages .flash-message {
+    margin-bottom: 0.5em;
+}

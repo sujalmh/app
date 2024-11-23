@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dining Experience Survey</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for message in messages %}
+                        <div class="flash-message alert alert-warning">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <header class="title-box">
+            <h1>Dining Experience Survey</h1>
+            <p>Help us understand your dining habits and preferences to create a better experience for you.</p>
+        </header>
+
+        <form action="/" method="POST" class="survey-form">
+            <!-- Email Section -->
+            <div class="form-box fade-in">
+                <div class="form-group">
+                    <label for="email">Enter your email:</label>
+                    <input type="email" id="email" name="email" placeholder="example@example.com" required>
+                </div>
+            </div>
+
+            <!-- Survey Questions -->
+            <div class="form-box fade-in">
+                <div class="form-group">
+                    <label class="mq">Do you feel anxious while ordering food?</label>
+                    <div>
+                        <input type="radio" id="q1-always" name="question1" value="Always" required>
+                        <label for="q1-always">Always</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="q1-sometimes" name="question1" value="Sometimes">
+                        <label for="q1-sometimes">Sometimes</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="q1-rarely" name="question1" value="Rarely">
+                        <label for="q1-rarely">Rarely</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="q1-never" name="question1" value="Never">
+                        <label for="q1-never">Never</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-box fade-in">
+                <div class="form-group">
+                    <label class="mq">Do you feel overwhelmed by the number of menu choices?</label>
+                    <div>
+                        <input type="radio" id="q2-always" name="question2" value="Always" required>
+                        <label for="q2-always">Always</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="q2-sometimes" name="question2" value="Sometimes">
+                        <label for="q2-sometimes">Sometimes</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="q2-rarely" name="question2" value="Rarely">
+                        <label for="q2-rarely">Rarely</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="q2-never" name="question2" value="Never">
+                        <label for="q2-never">Never</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-box fade-in">
+                <div class="form-group">
+                    <label class="mq">Do waiters often misunderstand your requirements?</label>
+                    <div>
+                        <input type="radio" id="q3-always" name="question3" value="Always" required>
+                        <label for="q3-always">Always</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="q3-sometimes" name="question3" value="Sometimes">
+                        <label for="q3-sometimes">Sometimes</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="q3-rarely" name="question3" value="Rarely">
+                        <label for="q3-rarely">Rarely</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="q3-never" name="question3" value="Never">
+                        <label for="q3-never">Never</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-box fade-in">
+                <div class="form-group">
+                    <label class="mq">Would you prefer a customized menu based on your preferences?</label>
+                    <div>
+                        <input type="radio" id="q4-always" name="question4" value="Always" required>
+                        <label for="q4-always">Always</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="q4-sometimes" name="question4" value="Sometimes">
+                        <label for="q4-sometimes">Sometimes</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="q4-rarely" name="question4" value="Rarely">
+                        <label for="q4-rarely">Rarely</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="q4-never" name="question4" value="Never">
+                        <label for="q4-never">Never</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-box fade-in">
+                <div class="form-group">
+                    <label class="mq">Does the restaurant’s nutritional information meet your needs?</label>
+                    <div>
+                        <input type="radio" id="q5-always" name="question5" value="Always" required>
+                        <label for="q5-always">Always</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="q5-sometimes" name="question5" value="Sometimes">
+                        <label for="q5-sometimes">Sometimes</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="q5-rarely" name="question5" value="Rarely">
+                        <label for="q5-rarely">Rarely</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="q5-never" name="question5" value="Never">
+                        <label for="q5-never">Never</label>
+                    </div>
+                </div>
+            </div>
+            
+
+            <!-- Submit Button -->
+                <div class="form-box fade-in">
+                    <a href="\thank-you"><button type="submit" class="btn">Submit</button></a>
+                </div>
+        </form>
+    </div>
+
+    <script src="/static/js/scripts.js"></script>
+    <script>
+        // Wait for the DOM to fully load
+        document.addEventListener("DOMContentLoaded", () => {
+            // Select the flash message container
+            const flashMessages = document.querySelector(".flash-messages");
+            if (flashMessages) {
+                // Set a timeout to remove the flash messages after 5 seconds
+                setTimeout(() => {
+                    flashMessages.style.transition = "opacity 0.5s";
+                    flashMessages.style.opacity = "0";
+    
+                    // Remove the element from the DOM after the transition
+                    setTimeout(() => flashMessages.remove(), 500);
+                }, 5000);
+            }
+        });
+    </script>    
+</body>
+</html>
