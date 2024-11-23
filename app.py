@@ -1,45 +1,50 @@
-import openpyxl
-from openpyxl import Workbook
 from flask import Flask, render_template, request, flash, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///responses.db'  # SQLite database for simplicity
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-store = "responses.xlsx"
+db = SQLAlchemy(app)
+
+# Define the database model
+class Response(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    question1 = db.Column(db.String(200), nullable=False)
+    question2 = db.Column(db.String(200), nullable=False)
+    question3 = db.Column(db.String(200), nullable=False)
+    question4 = db.Column(db.String(200), nullable=False)
+    question5 = db.Column(db.String(200), nullable=False)
+
+    def __init__(self, email, question1, question2, question3, question4, question5):
+        self.email = email
+        self.question1 = question1
+        self.question2 = question2
+        self.question3 = question3
+        self.question4 = question4
+        self.question5 = question5
+
+# Create the database tables
+with app.app_context():
+    db.create_all()
 
 def email_exists(email):
-    try:
-        workbook = openpyxl.load_workbook(store)
-        sheet = workbook.active
-        m_row = sheet.max_row
-
-        for i in range(2, m_row + 1): 
-            cell_value = sheet.cell(row=i, column=1).value
-            if cell_value == email:
-                return True
-    except FileNotFoundError:
-        return False
-    return False
+    response = Response.query.filter_by(email=email).first()
+    return response is not None
 
 def save_response(data):
-    try:
-        workbook = openpyxl.load_workbook(store)
-        sheet = workbook.active
-    except FileNotFoundError:
-        workbook = Workbook()
-        sheet = workbook.active
-        sheet.append(["email", "question1", "question2", "question3", "question4", "question5"])
-
-    sheet.append([
-        data["email"], 
-        data["question1"], 
-        data["question2"], 
-        data["question3"], 
-        data["question4"], 
-        data["question5"]
-    ])
-    
-    workbook.save(store)
+    new_response = Response(
+        email=data["email"],
+        question1=data["question1"],
+        question2=data["question2"],
+        question3=data["question3"],
+        question4=data["question4"],
+        question5=data["question5"]
+    )
+    db.session.add(new_response)
+    db.session.commit()
 
 @app.route("/", methods=["GET", "POST"])
 def form():
@@ -65,6 +70,14 @@ def form():
 @app.route("/thank-you")
 def thank_you():
     return render_template("thankyou.html")
+
+@app.route("/view-responses")
+def view_responses():
+    responses = Response.query.all()
+    for response in responses:
+        print(response.email, response.question1, response.question2, response.question3, response.question4, response.question5)
+    return "1234"
+
 
 if __name__ == "__main__":
     app.run(debug=True)
